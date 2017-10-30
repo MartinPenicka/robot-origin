@@ -1,11 +1,13 @@
 #include "motor.cc"
 #include "ultrasound.cc"
 
-const short led = 31;
-const short button = 7;
-const short pinButtonLed = 2;
+// pin definitions
+#define led 31
+#define button 7
+#define pinButtonLed 2
+
 const short stop_dist = 20;
-const short baseSpeed = 100;
+const short baseSpeed = 60;
 short speed = 0;
 
 // timing
@@ -50,19 +52,17 @@ void loop()
         motorLeft.stop();
         motorRight.stop();
 
-        /*
-        motorLeft.stop();
-        motorRight.stop();
         // turn left and go little bit
-        motorLeft.go_back(baseSpeed);
-        motorRight.go_front(baseSpeed);
+        motorLeft.go_back(speed);
+        motorRight.go_front(speed);
 
         delay(250);
         motorLeft.stop();
         motorRight.stop();
+        /*
         // turn right
-        motorLeft.go_front(baseSpeed);
-        motorRight.go_back(baseSpeed);
+        motorLeft.go_front(speed);
+        motorRight.go_back(speed);
         // go a little bit
                 
         delay(250);
@@ -73,8 +73,8 @@ void loop()
     else
     {
         digitalWrite(led, HIGH);
-        motorLeft.go(speed);
-        motorRight.go(speed);
+        motorLeft.go_front(speed);
+        motorRight.go_front(speed);
     }
     buttonState = digitalRead(button);
     if(buttonState == HIGH)
